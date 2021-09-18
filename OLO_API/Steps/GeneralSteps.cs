@@ -32,7 +32,7 @@ namespace OLO_API.Steps
         public void GivenOriginalObjectIsLoadedPerformingMETHODFromPATH(string method, string path)
         {
             var response = RestAPI.Execute(method, path);
-            this.originalObject = parsePostString(response.Content.ReadAsStringAsync().Result);
+            this.originalObject = parseObjectString(response.Content.ReadAsStringAsync().Result);
 
         }
 
@@ -98,7 +98,7 @@ namespace OLO_API.Steps
             var rawResponse = response.Content.ReadAsStringAsync().Result;
 
             //parse the response into the Primary Type under execution
-            var post = parsePostString(rawResponse);
+            var post = parseObjectString(rawResponse);
 
             //in case the method is a post (creation) we will save the newly created ID for later use
             if (this.method == "POST")
@@ -117,7 +117,7 @@ namespace OLO_API.Steps
             var rawResponse = response.Content.ReadAsStringAsync().Result;
 
             //parse the response into the Primary Type under execution
-            dynamic actualObj = parsePostString(rawResponse);
+            dynamic actualObj = parseObjectString(rawResponse);
 
             AssertObjectsMatch(this.Object, actualObj);
         }
@@ -132,7 +132,7 @@ namespace OLO_API.Steps
             //Throw Exception if Status Code is not 2xx or 3xx
             response.EnsureSuccessStatusCode();
             var rawResponse = response.Content.ReadAsStringAsync().Result;
-            dynamic actualObj = parsePostString(rawResponse);
+            dynamic actualObj = parseObjectString(rawResponse);
 
             //note last parameter is true, is the flag not to check the ID property
             AssertObjectsMatch(this.Object, actualObj, true);
@@ -147,7 +147,7 @@ namespace OLO_API.Steps
             var rawResponse = response.Content.ReadAsStringAsync().Result;
 
             //parse the response into the Primary Type under execution
-            dynamic actualObj = parsePostString(rawResponse);
+            dynamic actualObj = parseObjectString(rawResponse);
 
             //create expected object as an empty instance of the Primary Type under execution
             dynamic expectedObject = Activator.CreateInstance(this.Object.GetType());
@@ -192,7 +192,7 @@ namespace OLO_API.Steps
         }
 
 
-        public dynamic parsePostString(string jsonString)
+        public dynamic parseObjectString(string jsonString)
         {
             try
             {
