@@ -11,6 +11,9 @@ namespace OLO_API.Steps
     {
 
         GeneralSteps generalSteps;
+
+        //GeneralSteps is provided by context injection, a default functionality of specflow
+        //documentation: https://docs.specflow.org/projects/specflow/en/latest/Bindings/Context-Injection.html
         public Post_CommentSteps(GeneralSteps generalSteps)
         {
             this.generalSteps = generalSteps;
