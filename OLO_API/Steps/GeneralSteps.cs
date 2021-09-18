@@ -43,10 +43,11 @@ namespace OLO_API.Steps
         [When(@"user performs ""(.*)"" from ""(.*)""")]
         public void WhenUserPerformsMETHODFrom(string method, string path)
         {
+            this.method = method;
             //consumes the injected variable newlyCreatedId
             path = path.Replace("{newlyCreatedId}", newlyCreatedId.ToString());
             this.path = path;
-
+             
             this.response = RestAPI.Execute(method, path, Object);
 
 
