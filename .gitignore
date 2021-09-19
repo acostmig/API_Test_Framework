@@ -1,0 +1,7 @@
+[Tt]estResults/
+.*
+!.gitignore
+*.feature.cs
+
+bin
+obj
